@@ -80,6 +80,3 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Initialize the prompt 
 eval "$(starship init zsh)"
-
-
-## Here is an edit
