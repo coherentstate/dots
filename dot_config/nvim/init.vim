@@ -32,7 +32,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 syntax enable
-filetype plugin indent on
+" filetype plugin indent on
 set noshowcmd
 set noruler
 set numberwidth=3
