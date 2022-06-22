@@ -1,0 +1,85 @@
+# Created by newuser for 5.8.1
+
+# Source the .profile file
+source $HOME/.profile
+
+# Set up some environment variables
+export TMP="$HOME/temp"
+
+# Enable colors
+autoload -U colors && colors
+
+# Autocomplete setup
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Set location of zcompdump
+compinit -d ~/.cache/.zcompdump
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=~/.zhistory
+
+# Enable auto pushd
+setopt auto_pushd
+
+# Enable vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Enable searching through history via CTRL-R
+bindkey '^R' history-incremental-pattern-search-backward
+
+# Use vim keys for navigating through tab completion menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -v '^?' backward-delete-char
+
+# fzf configuration
+# With catppuccin theme
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border=rounded --ansi --preview "bat --color=always {}" --color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
+# Some fzf helper functions are in this f_sh file
+source "$HOME/.local/bin/f.sh"
+source "$HOME/.local/bin/func.sh"
+
+# Set EDITOR and VISUAL variables
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# Setup the spaceship prompt
+#autoload -U promptinit; promptinit
+#prompt spaceship
+# Spaceship config
+#SPACESHIP_PROMPT_ADD_NEWLINE=false
+#SPACESHIP_CHAR_SYMBOL=" "
+## SPACESHIP_CHAR_SYMBOL=" "
+#SPACESHIP_CHAR_SUFFIX=" "
+#SPACESHIP_CONDA_SHOW=false
+#SPACESHIP_HOST_SHOW=always
+#SPACESHIP_PYENV_SYMBOL=" "
+#SPACESHIP_VI_MODE_SHOW=false
+
+# Plugins and scripts are sourced here!
+source $HOME/.zsh/aliases.zsh
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Initialize pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Initialize homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Initialize the prompt 
+eval "$(starship init zsh)"
+
+
+## Here is an edit
