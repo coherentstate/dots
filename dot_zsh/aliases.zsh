@@ -35,8 +35,6 @@ alias gc='git commit'
 alias gca='git commit --amend'
 alias gp='git push origin main'
 alias lg='lazygit'
-# Dotfile management in git bare repo
-alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
 
 #---------------Shortcuts to directories-------------------
 alias code='cd "$HOME/code" && ls'
