@@ -5,6 +5,17 @@ scan_timeout = 10
 # Disable the blank line at the start of the prompt
 add_newline = false
 
+[character]
+error_symbol = "[   ](bold red)"
+success_symbol = "[   ](bold green)"
+vicmd_symbol = "[   ](bold yellow)"
+format = "$symbol(bold green)"
+
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol $hostname]($style) in "
+style = "bold dimmed blue"
+
 [python]
 symbol = " "
 #pyenv_version_name = true
