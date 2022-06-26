@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH="$HOME/.pyenv/bin:$PATH:/usr/local/texlive/2022/bin/x86_64-linux:$HOME/.local/bin:$HOME/.emacs.d/bin"
+export PATH="$HOME/.pyenv/bin:$PATH:/usr/local/texlive/2022/bin/x86_64-linux:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.spicetify"
 # export WINIT_UNIX_BACKEND=x11
 # export KITTY_ENABLE_WAYLAND=1
 
