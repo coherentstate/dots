@@ -1,0 +1,756 @@
+global !p
+
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment():
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+	return x != '0' and y != '0'
+
+endglobal
+
+
+snippet pream "Basic preamble" b
+\documentclass{article}
+\usepackage[a4paper, margin=0.9in]{geometry}
+\usepackage{lipsum, lmodern}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[most]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{wrapfig, graphicx, caption, subcaption}
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+% Insert all other packages here
+%$1\usepackage{}
+
+\title{$2}
+\author{${3:Abhirup Bhattacharya}}
+\date{}
+
+\begin{document}
+\maketitle
+$0
+\end{document}
+endsnippet
+
+
+snippet theoremenv "Initialize theorem env" b
+% To be added in the preamble (of main.tex in case of big project).
+%% INITIALIZE THEOREM ENVIRONMENTS
+\theoremstyle{plain} %default
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{prp}{Proposition}[chapter]
+\newtheorem{lm}{Lemma}[chapter]
+\newtheorem{cor}{Corollary}[chapter]
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}[chapter]
+\newtheorem{exr}{Exercise}[chapter]
+\newtheorem{exm}{Example}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{note}{Note}[chapter]
+\newtheorem{rmk}{Remark}[chapter]
+
+\tcolorboxenvironment{dfn}{blanker, breakable, left=5mm, borderline west={1mm}{0pt}{blue!40!white}}
+\tcolorboxenvironment{rmk}{blanker, breakable, left=5mm, borderline west={1mm}{0pt}{green!65!black}}
+\tcolorboxenvironment{exm}{blanker, breakable, left=5mm, borderline west={1mm}{0pt}{black}}
+\tcolorboxenvironment{thm}{breakable, colback=blue!10!white, colframe=blue!10!white}
+\tcolorboxenvironment{prp}{breakable, colback=blue!10!white, colframe=blue!10!white}
+\tcolorboxenvironment{lm}{breakable, colback=blue!10!white, colframe=blue!10!white}
+\tcolorboxenvironment{cor}{breakable, colback=blue!10!white, colframe=blue!10!white}
+\tcolorboxenvironment{exr}{breakable, colback=red!10!white, colframe=red!10!white}
+
+$0
+endsnippet
+
+
+snippet lecnotes "Lecture notes preamble" b
+%% PACKAGE IMPORTS
+\documentclass[14pt]{report}
+\usepackage[a4paper, margin=0.9in]{geometry}
+\usepackage{lipsum, lmodern}
+\usepackage{amsmath, amsthm, amssymb, braket}
+\usepackage[most]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage{newtxmath, ebgaramond-maths, extsizes}  % Enable this for the EBGaramond font
+\usepackage[utf8]{inputenc}
+\usepackage{wrapfig, graphicx, caption, subcaption}
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{xcolor}
+\usepackage{titling, url, array}
+\graphicspath{{./figures/}}
+\usepackage{subfiles}
+\usepackage{biblatex}
+\addbibresource{bibliography.bib}
+
+%% THIS BLOCK IS NEEDED TO ENABLE PARTIAL DERIVATIVE SYMBOLS IN THE EBGARAMOND-MATHS FONT
+\makeatletter
+\DeclareSymbolFont{ntxletters}{OML}{ntxmi}{m}{it}
+\SetSymbolFont{ntxletters}{bold}{OML}{ntxmi}{b}{it}
+\re@DeclareMathSymbol{\partial}{\mathord}{ntxletters}{"40}
+\makeatother
+endsnippet
+
+
+snippet subpream "Subfile preamble" b
+\documentclass[main.tex]{subfiles}
+\graphicspath{\subfix{/figures}}
+endsnippet
+
+
+snippet titlepage "Title page" b
+\begin{titlepage}
+	\centering
+
+	\rule{\textwidth}{4pt}
+
+	\vspace{0.1\textheight}
+
+	\textcolor{blue}{
+		% Add the title here
+		{\Huge $1}\\\\[0.5\baselineskip]
+		{\Large $2}\\\\[0.5\baselineskip]
+		{\Huge $3}\\\\[\baselineskip]
+		% etc...
+	}
+
+	\vspace{0.025\textheight}
+	\rule{0.3\textwidth}{0.4pt}
+	\vspace{0.135\textheight}
+
+	% Add author information here
+	{\Large \textsc{$4}}\\\\[2\baselineskip]
+	%{\large \textsc{Designed and Compiled by}}\\\\[\baselineskip]
+	%{\large \textsc{}}
+	% etc...
+	
+	\vfill
+
+	% Insert institution logo here
+	\includegraphics[width=3cm, height=3cm]{$5}
+
+	\vspace{0.1\textheight}
+	
+	\rule{\textwidth}{4pt}
+\end{titlepage}
+endsnippet
+
+
+snippet chap* "Chapter" b
+\chapter*{$1}
+{\centering
+	\vspace{0.01\textheight}
+	\rule{\textwidth}{2pt}
+	\vspace{0.04\textheight}\\\\
+}
+$0
+endsnippet
+
+
+snippet chap "Chapter" b
+\chapter{$1}
+{\centering
+	\vspace{0.01\textheight}
+	\rule{\textwidth}{2pt}
+	\vspace{0.04\textheight}\\\\
+}
+$0
+endsnippet
+
+
+snippet toc "Contents" b
+\tableofcontents
+endsnippet
+
+
+snippet beg "begin{}/end{}" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+
+snippet sec "Section" b
+\section{$1}
+$0
+endsnippet
+
+
+snippet ... "ldots" iA
+\ldots
+endsnippet
+
+
+snippet enum "Enumerate" b
+\begin{enumerate}
+	\item $0
+
+\end{enumerate}
+endsnippet
+
+
+context "env('enumerate')"
+snippet it "item" bA
+\item
+endsnippet
+
+
+snippet item "Itemize" b
+\begin{itemize}
+	\item $0
+
+\end{itemize}
+endsnippet
+
+
+context "env('itemize')"
+snippet it "item" bA
+\item
+endsnippet
+
+
+snippet desc "Description" b
+\begin{description}
+	\item[$1] $0
+
+\end{description}
+endsnippet
+
+
+context "env('description')"
+snippet it "item" bA
+\item
+endsnippet
+
+
+
+snippet bf "textbf" wA
+\textbf{$1} $0
+endsnippet
+
+
+snippet ht "emph" wA
+\emph{${1:${VISUAL}}}$0
+endsnippet
+
+
+snippet fig "Figure environment" b
+\begin{figure}[${1:h}]
+	\centering
+	\includegraphics[width=${2:0.6}\textwidth]{$3}
+	\caption{$4}
+	\label{fig: $5}
+\end{figure}
+endsnippet
+
+
+snippet figsub "Subfigure environment" bA
+\begin{figure}[h]
+	\centering
+	% Insert first subfigure here
+	$1
+	\hfill
+	% Insert second subfigure here
+	$2
+	\caption{$3}
+	\label{fig: $4}
+\end{figure}
+endsnippet
+
+snippet subfig "Subfigure" b
+\begin{subfigure}[b]{${1:0.45}\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{$2}
+	\caption{$3}
+	\label{fig: $4}
+\end{subfigure}
+endsnippet
+
+
+snippet wrapfig "Wrapfigure environment" b
+\begin{wrapfigure}{${1:l}}{${2:0.5}\textwidth}
+	\begin{center}
+		\includegraphics[width=${3:0.48}\textwidth]{$4}
+	\end{center}
+	\caption{$5}
+\end{wrapfigure}
+endsnippet
+
+
+snippet ( "parenthesis" iA
+(${1:${VISUAL}})$0
+endsnippet
+
+
+snippet [ "square brackets" wA
+[${1:${VISUAL}}]$0
+endsnippet
+
+
+snippet { "curly brackets" wA
+{${1:${VISUAL}}}$0
+endsnippet
+
+
+snippet ' "single quotes" wA
+\lq ${1:${VISUAL}}\rq\ $0
+endsnippet
+
+
+snippet dfn "Definition" bA
+\begin{dfn}[\emph{$1}]
+	$2
+\end{dfn}
+$0
+endsnippet
+
+
+snippet rmk "Remark" bA
+\begin{rmk}
+	${1:${VISUAL}}
+\end{rmk}
+$0
+endsnippet
+
+
+snippet exm "Example" bA
+\begin{exm}[\emph{$1}]
+	$2
+\end{exm}
+$0
+endsnippet
+
+
+snippet thm "Theorem" bA
+\begin{thm}[\emph{$1}]
+	$2
+\end{thm}
+endsnippet
+
+
+snippet exr "Exercise" bA
+\begin{exr}[\emph{$1}]
+	$2
+\end{exr}
+endsnippet
+
+#___________________ All math snippets go here ____________________
+
+snippet mk "Inline math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+
+snippet dm "Display math" wA
+\[
+	${1:${VISUAL}}
+\]
+$0
+endsnippet
+
+
+snippet eqn "equation" bA
+\begin{equation}
+	${1:${VISUAL}}
+\end{equation}
+$0
+endsnippet
+
+
+snippet ali "Align" bA
+\begin{align*}
+	${1:${VISUAL}}
+\end{align*} $0
+endsnippet
+
+
+context "math()"
+snippet // "Fraction" wA
+\\frac{$1}{$2} $0
+endsnippet
+
+
+context "math()"
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+
+context "math()"
+snippet compl "Complement" iA
+^{c}
+endsnippet
+
+
+context "math()"
+snippet uu "Superscript" iA
+^{$1}$0
+endsnippet
+
+
+context "math()"
+snippet ll "subscript" iA
+_{$1}$0
+endsnippet
+
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto superscript" wrA
+`!p snip.rv = match.group(1)`^`!p snip.rv = match.group(2)`
+endsnippet
+
+
+context "math()"
+snippet '([A-Za-z])(\d\d)' "auto superscript" wrA
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
+endsnippet
+
+
+context "math()"
+snippet fun "Function" wA
+${1:f}: ${2:\mathbb{R}} \rightarrow ${3:\mathbb{R}}
+endsnippet
+
+
+context "math()"
+snippet st "set" wA
+\\{$1\\}$0
+endsnippet
+
+
+context "math()"
+snippet setm "setminus" iA
+\setminus
+endsnippet
+
+
+context "math()"
+snippet lr( "left( right)" iA
+\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+
+context "math()"
+snippet lr[ "left[ right]" iA
+\left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+
+context "math()"
+snippet lr{ "left{ right}" iA
+\left\\{ ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+
+context "math()"
+snippet lr| "left| right|" iA
+\left| ${1:${VISUAL}} \right|$0
+endsnippet
+
+
+context "math()"
+snippet norm "norm" iA
+\left\\| ${1:${VISUAL}} \right\\|
+endsnippet
+
+
+context "math()"
+snippet mcal "mathcal" wA
+\mathcal{${1:${VISUAL}}}$0
+endsnippet
+
+
+context "math()"
+snippet mbb "mathbb" wA
+\mathbb{${1:${VISUAL}}}$0
+endsnippet
+
+
+context "math()"
+snippet mfr "mathfrak" wA
+\mathfrak{${1:${VISUAL}}}$0
+endsnippet
+
+
+context "math()"
+snippet RR "Real numbers" wA
+\mathbb{R}
+endsnippet
+
+
+context "math()"
+snippet 'R([nNmMdDkpq])' "R^n" wrA
+\mathbb{R}^{`!p snip.rv = match.group(1)`}
+endsnippet
+
+
+context "math()"
+snippet CC "Complex numbers" wA
+\mathbb{C}
+endsnippet
+
+
+context "math()"
+snippet Cn "C^n" wA
+\mathbb{C}^n
+endsnippet
+
+
+context "math()"
+snippet NN "Natural numbers" wA
+\mathbb{N}
+endsnippet
+
+
+context "math()"
+snippet ZZ "Integers" wA
+\mathbb{Z}
+endsnippet
+
+
+context "math()"
+snippet ooo "Infinity" wA
+\infty
+endsnippet
+
+
+context "math()"
+snippet AA "Forall" wA
+\forall
+endsnippet
+
+
+context "math()"
+snippet EE "There exists" wA
+\exists
+endsnippet
+
+
+context "math()"
+snippet '([A-Za-z])ii' "x subscript" wrA
+`!p snip.rv = match.group(1)`_{${1:i}}
+endsnippet
+
+
+context "math()"
+snippet xx "times" iA
+\times$0
+endsnippet
+
+
+context "math()"
+snippet ** "cdot" iA
+\cdot
+endsnippet
+
+
+context "math()"
+snippet <= "leq" iA
+\leq
+endsnippet
+
+
+context "math()"
+snippet >= "geq" iA
+\geq
+endsnippet
+
+
+context "math()"
+snippet == "$=" iA
+$=
+endsnippet
+
+
+context "math()"
+snippet lll "ell" wA
+\ell
+endsnippet
+
+
+
+context "math()"
+snippet UU "small cup" iA
+\cup
+endsnippet
+
+
+context "math()"
+snippet bcu "Big cup" iA
+\bigcup_{$1}$0
+endsnippet
+
+
+context "math()"
+snippet nn "small cap" iA
+\cap
+endsnippet
+
+
+context "math()"
+snippet bca "Big cap" iA
+\bigcap_{$1}$0
+endsnippet
+
+
+context "math()"
+snippet cc "subset" iA
+\subset
+endsnippet
+
+
+context "math()"
+snippet inn "in" iA
+\in
+endsnippet
+
+
+context "math()"
+snippet notin "not in" iA
+\not\in
+endsnippet
+
+
+context "math()"
+snippet OO "emptyset" iA
+\emptyset
+endsnippet
+
+
+context "math()"
+snippet "([a-zA-Z])bar" "bar" irA
+\overline{`!p snip.rv = match.group(1)`}
+endsnippet
+
+
+context "math()"
+snippet "([a-zA-Z])hat" "hat" irA
+\hat{`!p snip.rv = match.group(1)`}
+endsnippet
+
+
+context "math()"
+snippet "([a-zA-Z])st" "star" irA
+`!p snip.rv = match.group(1)`^{*}
+endsnippet
+
+
+context "math()"
+snippet '(?<!\\)(sin|cos|tan|sec|csc|cot)' "trig" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+context "math()"
+snippet '(?<!\\)(arcsin|arccos|arctan|arcsec|arccsc|arccot)' "inverse trig" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+context "math()"
+snippet '(?<!\\)(phi|psi|mu|nu|rho|sigma|lambda|theta|zeta)' "greek1" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+context "math()"
+snippet '(?<!\\)(alpha|beta|xi|kappa|varphi|pi|tau)' "greek2" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+context "math()"
+snippet '(?<!\\)(log|exp|ln|log_{2})' "log exp" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+context "math()"
+snippet -> "right arrow" iA
+\rightarrow
+endsnippet
+
+
+context "math()"
+snippet <- "left arrow" iA
+\leftarrow
+endsnippet
+
+
+context "math()"
+snippet <-> "left right arrow" iA
+\leftrightarrow
+endsnippet
+
+
+context "math()"
+snippet to "maps to" iA
+\mapsto
+endsnippet
+
+
+context "math()"
+snippet delx "partial derivative" wA
+\frac{\partial ${1:${VISUAL}}}{\partial ${2:x}}$0
+endsnippet
+
+
+context "math()"
+snippet dint "definite integral" wA
+\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+endsnippet
+
+
+context "math()"
+snippet cvec "column vector" iA
+\begin{pmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{pmatrix}
+endsnippet
+
+
+context "math()"
+snippet pmat "pmat" iA
+\begin{pmatrix}
+	$1
+\end{pmatrix}$0
+endsnippet
+
+
+context "math()"
+snippet bmat "bmatrix" iA
+\begin{bmatrix}
+	$1
+\end{bmatrix}$0
+endsnippet
+
+
+context "math()"
+snippet opname "Operator name" wA
+\operatorname{${1:${VISUAL}}}
+endsnippet
+
+
+context "math()"
+snippet cmp "Function composition" iA
+\circ
+endsnippet
+
+
+context "math()"
+snippet inv "Inverse" iA
+^{-1}
+endsnippet
