@@ -1,1 +1,14 @@
 include catppuccin
+
+set recolor "true"
+set recolor-keephue "false"
+
+# settings
+set selection-clipboard clipboard
+set adjust-open width
+set statusbar-home-tilde true
+set synctex true
+
+# Key bindings
+map + zoom in
+map - zoom out
