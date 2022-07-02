@@ -1,8 +1,12 @@
 #!/bin/bash
 
-export PATH="$HOME/.pyenv/bin:/usr/local/texlive/2022/bin/x86_64-linux:$PATH:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.spicetify"
+export PATH="$HOME/.pyenv/bin:/usr/local/texlive/2022/bin/x86_64-linux:$PATH:\
+$HOME/.local/bin:$HOME/.emacs.default/bin:$HOME/.doom-emacs/bin:$HOME/.spicetify"
 # export WINIT_UNIX_BACKEND=x11
 # export KITTY_ENABLE_WAYLAND=1
 # export QT_QPA_PLATFORMTHEME=qt5ct
 
 . "/home/euler/.cargo/env"
+
+# Start the emacs daemon
+emacs --daemon
