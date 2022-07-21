@@ -9,4 +9,4 @@ $HOME/.local/bin:$HOME/.emacs.default/bin:$HOME/.doom-emacs/bin:$HOME/.spicetify
 . "/home/euler/.cargo/env"
 
 # Start the emacs daemon
-emacs --daemon
+# emacs --daemon

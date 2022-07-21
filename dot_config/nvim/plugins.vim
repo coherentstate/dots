@@ -81,6 +81,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'akinsho/toggleterm.nvim'
 
+"________________Hop nvim________________________
+
+Plug 'phaazon/hop.nvim'
+
 "________________Neovim dashboard_________________
 
 "Plug 'glepnir/dashboard-nvim'
