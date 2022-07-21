@@ -42,7 +42,7 @@ bindkey -v '^?' backward-delete-char
 
 # fzf configuration
 # With catppuccin theme
-export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border=rounded --ansi --preview "bat --color=always {}" --color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border=rounded --ansi --preview "bat --color=always {}"'
 # Some fzf helper functions are in this f_sh file
 source "$HOME/.local/bin/f.sh"
 source "$HOME/.local/bin/func.sh"

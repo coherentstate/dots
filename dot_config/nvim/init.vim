@@ -16,7 +16,7 @@ set background=dark
 " let g:material_style = "deep ocean"
 " colorscheme material
 " colorscheme gruvbox
-colorscheme catppuccin
+colorscheme onedark
 " let g:onedark_comment_style = "italic"
 " let g:onedark_keyword_style = "italic"
 " let g:onedark_function_style = "italic"
